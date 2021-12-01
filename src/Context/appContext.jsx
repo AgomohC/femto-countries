@@ -6,6 +6,7 @@ const AppContext = React.createContext();
 
 const initialState = {
    isDarkMode: true,
+   searchValue: "",
 };
 
 const AppProvider = ({ children }) => {
@@ -13,8 +14,11 @@ const AppProvider = ({ children }) => {
    const setDarkMode = () => {
       dispatch({ type: "SET_DARK_MODE", initialState });
    };
+   const setSearchValue = (event) => {
+      dispatch({ type: "SEARCH", payload: event.target.value, initialState });
+   };
    return (
-      <AppContext.Provider value={{ ...state, setDarkMode }}>
+      <AppContext.Provider value={{ ...state, setDarkMode, setSearchValue }}>
          {children}
       </AppContext.Provider>
    );

@@ -31,7 +31,6 @@ const useStyles = makeStyles((theme) => ({
 const Header = () => {
    const classes = useStyles();
    const { setDarkMode, isDarkMode } = useGlobalContext();
-   console.log(isDarkMode);
    return (
       <>
          <AppBar position="fixed" color="primary">
