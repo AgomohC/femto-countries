@@ -16,14 +16,16 @@ const useStyles = makeStyles((theme) => ({
    container: {
       justifyContent: "space-between",
       alignItems: "flex-end",
+      paddingLeft: 0,
+      paddingRight: 0,
+      marginLeft: "auto",
+      marginRight: "auto",
    },
    item1: {
-      marginLeft: theme.spacing(3),
       marginRight: theme.spacing(3),
       marginBottom: theme.spacing(3),
 
       [theme.breakpoints.up("sm")]: {
-         marginLeft: theme.spacing(5),
          marginBottom: 0,
       },
    },
@@ -31,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: theme.spacing(3),
       marginRight: theme.spacing(3),
       [theme.breakpoints.up("sm")]: {
-         marginRight: theme.spacing(5),
+         marginRight: theme.spacing(0),
       },
    },
    select: {
@@ -80,7 +82,7 @@ const Input = () => {
 
    return (
       <>
-         <Grid container className={classes.container}>
+         <Grid container xs={10} className={classes.container}>
             <Grid item xs={12} sm={5} className={classes.item1}>
                <Paper className={classes.search}>
                   <div className={classes.searchIcon}>

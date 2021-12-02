@@ -2,10 +2,12 @@ const reducer = (state, action) => {
    switch (action.type) {
       case "SET_DARK_MODE":
          const { isDarkMode } = state;
-         return { ...action.state, isDarkMode: !isDarkMode };
+         return { ...state, isDarkMode: !isDarkMode };
       case "SEARCH":
          const newValue = action.payload;
-         return { ...action.state, searchValue: newValue };
+         return { ...state, searchValue: newValue };
+      case "DISPLAY_ITEMS":
+         return { ...state, countries: action.payload };
 
       default:
          return state;
