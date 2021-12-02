@@ -29,7 +29,8 @@ const SingleCountry = (props) => {
                   {name}
                </Typography>
                <Typography variant="body2" color="textSecondary" component="p">
-                  <span className={classes.bold}>Population:</span> {population}
+                  <span className={classes.bold}>Population:</span>{" "}
+                  {new Intl.NumberFormat("en-UK").format(population)}
                </Typography>
                <Typography variant="body2" color="textSecondary" component="p">
                   <span className={classes.bold}>Capital:</span> {capital}

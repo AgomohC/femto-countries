@@ -8,6 +8,7 @@ const initialState = {
    countries: [],
    isDarkMode: true,
    searchValue: "",
+   singleCountry: {},
 };
 
 const AppProvider = ({ children }) => {

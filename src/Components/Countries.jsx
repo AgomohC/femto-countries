@@ -7,11 +7,11 @@ const Countries = () => {
    const { countries } = useGlobalContext();
 
    return (
-      <Grid container item spacing={3}>
+      <Grid container item spacing={8}>
          {countries.map((country) => {
             return (
                <Grid xs={12} sm={6} md={3} item key={country.name}>
-                  <SingleCountry country={country} />;
+                  <SingleCountry country={country} />
                </Grid>
             );
          })}

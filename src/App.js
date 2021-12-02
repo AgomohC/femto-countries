@@ -3,6 +3,7 @@ import Header from "./Components/Header";
 import { makeStyles, Grid } from "@material-ui/core";
 import Input from "./Components/Input";
 import Countries from "./Components/Countries";
+import CountryPage from "./Components/CountryPage";
 const useStyles = makeStyles((theme) => ({
    container: {
       marginTop: theme.spacing(10),
@@ -22,6 +23,7 @@ const App = () => {
          <Grid container className={classes.container} item>
             <Input />
          </Grid>
+         <CountryPage></CountryPage>
          <Grid container className={classes.container2} item xs={10}>
             <Countries />
          </Grid>
