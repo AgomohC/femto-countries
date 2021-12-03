@@ -13,7 +13,12 @@ const useStyles = makeStyles((theme) => ({
    },
 }));
 
-const CountryPage = () => {
+const CountryPage = (props) => {
+   const {
+      match: {
+         params: { name },
+      },
+   } = props;
    const { SingleCountry } = useGlobalContext();
 
    const classes = useStyles();

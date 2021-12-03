@@ -4,6 +4,11 @@ import { makeStyles, Grid } from "@material-ui/core";
 import Input from "./Components/Input";
 import Countries from "./Components/Countries";
 import CountryPage from "./Components/CountryPage";
+import { Router, Switch, Route } from "react-router-dom";
+import { createBrowserHistory } from "history";
+
+const history = createBrowserHistory();
+
 const useStyles = makeStyles((theme) => ({
    container: {
       marginTop: theme.spacing(10),
@@ -18,16 +23,26 @@ const useStyles = makeStyles((theme) => ({
 const App = () => {
    const classes = useStyles();
    return (
-      <Grid container>
-         <Header />
-         <Grid container className={classes.container} item>
-            <Input />
-         </Grid>
-         <CountryPage></CountryPage>
-         <Grid container className={classes.container2} item xs={10}>
-            <Countries />
-         </Grid>
-      </Grid>
+      <Router history={history}>
+         <Switch>
+            <Grid container>
+               <Route exact path="/">
+                  <Header />
+                  <Grid container className={classes.container} item>
+                     <Input />
+                  </Grid>
+                  <Grid container className={classes.container2} item xs={10}>
+                     <Countries />
+                  </Grid>
+               </Route>
+               <Route
+                  exact
+                  path="/:name"
+                  render={(props) => <CountryPage {...props} />}
+               />
+            </Grid>
+         </Switch>
+      </Router>
    );
 };
 

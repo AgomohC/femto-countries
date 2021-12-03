@@ -8,7 +8,12 @@ const reducer = (state, action) => {
          return { ...state, searchValue: newValue };
       case "DISPLAY_ITEMS":
          return { ...state, countries: action.payload };
-
+      case "SET_LOADING":
+         return { ...state, isLoading: true };
+      case "STOP_LOADING":
+         return { ...state, isLoading: false };
+      case "SINGLE_COUNTRY":
+         return { ...state, singleCountry: action.payload };
       default:
          return state;
    }

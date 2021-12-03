@@ -1,20 +1,38 @@
 import React from "react";
 import SingleCountry from "./SingleCountry";
-import { Grid } from "@material-ui/core";
+import { Grid, CircularProgress, makeStyles } from "@material-ui/core";
 import { useGlobalContext } from "../Context/appContext";
 
-const Countries = () => {
-   const { countries } = useGlobalContext();
+const useStyles = makeStyles((theme) => ({
+   loading: {
+      marginLeft: "auto",
+      marginRight: "auto",
+      marginTop: theme.spacing(5),
+   },
+   progress: {
+      marginLeft: "auto",
+      marginRight: "auto",
+   },
+}));
 
+const Countries = () => {
+   const { countries, isLoading } = useGlobalContext();
+   const classes = useStyles();
    return (
       <Grid container item spacing={8}>
-         {countries.map((country) => {
-            return (
-               <Grid xs={12} sm={6} md={3} item key={country.name}>
-                  <SingleCountry country={country} />
-               </Grid>
-            );
-         })}
+         {isLoading ? (
+            <Grid item xs={3} className={classes.loading}>
+               <CircularProgress className={classes.progress} />
+            </Grid>
+         ) : (
+            countries.map((country) => {
+               return (
+                  <Grid xs={12} sm={6} md={3} item key={country.name}>
+                     <SingleCountry country={country} />
+                  </Grid>
+               );
+            })
+         )}
       </Grid>
    );
 };

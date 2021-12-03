@@ -3,12 +3,14 @@ import React, { useContext, useReducer, useEffect } from "react";
 import reducer from "./reducer";
 
 const AppContext = React.createContext();
+const url = "https://restcountries.com/v2/";
 
 const initialState = {
    countries: [],
    isDarkMode: true,
    searchValue: "",
-   singleCountry: {},
+   singleCountry: [],
+   isLoading: false,
 };
 
 const AppProvider = ({ children }) => {
@@ -20,8 +22,41 @@ const AppProvider = ({ children }) => {
       dispatch({ type: "SEARCH", payload: event.target.value, initialState });
    };
    const fetchData = async () => {
+      dispatch({ type: "SET_LOADING", initialState });
       try {
-         const { data } = await axios.get(`https://restcountries.com/v2/all`);
+         const { data } = await axios.get(`${url}all`);
+
+         const response = await data.map((datum) => {
+            const {
+               name,
+               region,
+               capital,
+               population,
+               flags: { png },
+               alpha3Code,
+            } = datum;
+            return {
+               name,
+               region,
+               capital,
+               population,
+               png,
+               alpha3Code,
+            };
+         });
+         dispatch({ type: "STOP_LOADING" });
+         dispatch({ type: "DISPLAY_ITEMS", payload: response });
+      } catch (error) {
+         dispatch({ type: "STOP_LOADING" });
+         console.log(`error`);
+      }
+   };
+   useEffect(() => {
+      fetchData();
+   }, []);
+   const getSingleCountry = async (code) => {
+      try {
+         const { data } = await axios.get(`${url}alpha?codes=${code}`);
 
          const response = await data.map((datum) => {
             const {
@@ -49,18 +84,15 @@ const AppProvider = ({ children }) => {
                currencies,
             };
          });
-
-         dispatch({ type: "DISPLAY_ITEMS", payload: response });
-      } catch (error) {
-         console.log(`error`);
+         dispatch({ type: "SINGLE_COUNTRY", payload: response, initialState });
+      } catch {
+         console.log("error");
       }
    };
-   useEffect(() => {
-      fetchData();
-   }, []);
-
    return (
-      <AppContext.Provider value={{ ...state, setDarkMode, setSearchValue }}>
+      <AppContext.Provider
+         value={{ ...state, setDarkMode, setSearchValue, getSingleCountry }}
+      >
          {children}
       </AppContext.Provider>
    );

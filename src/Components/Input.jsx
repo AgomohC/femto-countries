@@ -30,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
       },
    },
    item2: {
-      marginLeft: theme.spacing(3),
       marginRight: theme.spacing(3),
       [theme.breakpoints.up("sm")]: {
          marginRight: theme.spacing(0),
@@ -99,7 +98,7 @@ const Input = () => {
                   />
                </Paper>
             </Grid>
-            <Grid item xs={5} sm={3} className={classes.item2}>
+            <Grid item xs={5} sm={4} md={3} className={classes.item2}>
                <FormControl className={classes.select}>
                   <InputLabel>Filter by Region</InputLabel>
                   <NativeSelect>
