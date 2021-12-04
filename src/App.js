@@ -37,7 +37,7 @@ const App = () => {
                </Route>
                <Route
                   exact
-                  path="/:name"
+                  path="/alpha/:code"
                   render={(props) => <CountryPage {...props} />}
                />
             </Grid>

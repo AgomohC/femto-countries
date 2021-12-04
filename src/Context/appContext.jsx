@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useContext, useReducer, useEffect } from "react";
+import React, { useContext, useReducer, useEffect, useCallback } from "react";
 import reducer from "./reducer";
 
 const AppContext = React.createContext();
@@ -16,16 +16,15 @@ const initialState = {
 const AppProvider = ({ children }) => {
    const [state, dispatch] = useReducer(reducer, initialState);
    const setDarkMode = () => {
-      dispatch({ type: "SET_DARK_MODE", initialState });
+      dispatch({ type: "SET_DARK_MODE" });
    };
    const setSearchValue = (event) => {
-      dispatch({ type: "SEARCH", payload: event.target.value, initialState });
+      dispatch({ type: "SEARCH", payload: event.target.value });
    };
    const fetchData = async () => {
-      dispatch({ type: "SET_LOADING", initialState });
+      dispatch({ type: "SET_LOADING" });
       try {
          const { data } = await axios.get(`${url}all`);
-
          const response = await data.map((datum) => {
             const {
                name,
@@ -54,41 +53,30 @@ const AppProvider = ({ children }) => {
    useEffect(() => {
       fetchData();
    }, []);
-   const getSingleCountry = async (code) => {
+   const getSingleCountry = useCallback(async (code) => {
       try {
-         const { data } = await axios.get(`${url}alpha?codes=${code}`);
-
-         const response = await data.map((datum) => {
-            const {
-               name,
-               region,
-               capital,
-               population,
-               subregion,
-               flags: { png },
-               topLevelDomain,
-               languages,
-               nativeName,
-               currencies,
-            } = datum;
-            return {
-               name,
-               region,
-               capital,
-               population,
-               subregion,
-               png,
-               topLevelDomain,
-               languages,
-               nativeName,
-               currencies,
-            };
+         const data = await fetch(`${url}alpha/${code}`);
+         const response = await data.json();
+         const responseMap = {
+            name: response.name,
+            region: response.region,
+            capital: response.capital,
+            population: response.population,
+            subregion: response.subregion,
+            flags: response.flags.png,
+            topLevelDomain: response.topLevelDomain,
+            languages: response.languages,
+            nativeName: response.nativeName,
+            currencies: response.currencies,
+         };
+         dispatch({
+            type: "SINGLE_COUNTRY",
+            payload: responseMap,
          });
-         dispatch({ type: "SINGLE_COUNTRY", payload: response, initialState });
       } catch {
          console.log("error");
       }
-   };
+   }, []);
    return (
       <AppContext.Provider
          value={{ ...state, setDarkMode, setSearchValue, getSingleCountry }}

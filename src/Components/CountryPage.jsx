@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles, Grid, Button } from "@material-ui/core";
 import { useGlobalContext } from "../Context/appContext";
 
@@ -16,14 +16,19 @@ const useStyles = makeStyles((theme) => ({
 const CountryPage = (props) => {
    const {
       match: {
-         params: { name },
+         params: { code },
       },
    } = props;
-   const { SingleCountry } = useGlobalContext();
+   const { getSingleCountry } = useGlobalContext();
 
+   useEffect(() => {
+      getSingleCountry(code);
+   }, [code, getSingleCountry]);
+   const { singleCountry } = useGlobalContext();
+   console.log(singleCountry);
    const classes = useStyles();
    return (
-      <Grid container xs={10} className={classes.container}>
+      <Grid container item xs={10} className={classes.container}>
          <Grid xs={2} item>
             <Button variant="contained" color="default">
                Back to home
@@ -31,7 +36,7 @@ const CountryPage = (props) => {
          </Grid>
          <Grid container item spacing={5} className={classes.container2}>
             <Grid item xs={12} sm={6}>
-               image
+               {code}
             </Grid>
             <Grid item xs={12} sm={6}>
                props

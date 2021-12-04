@@ -5,7 +5,6 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
-import { useGlobalContext } from "../Context/appContext";
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -15,19 +14,22 @@ const useStyles = makeStyles((theme) => ({
    bold: {
       fontWeight: "bold",
    },
+   link: {
+      color: "inherit",
+      textDecoration: "none",
+   },
 }));
 
 const SingleCountry = (props) => {
    const classes = useStyles();
-   const { getSingleCountry } = useGlobalContext();
 
    const {
-      country: { png, name, region, capital, population },
+      country: { png, name, region, capital, population, alpha3Code },
    } = props;
    return (
       <Card>
          <CardActionArea>
-            <Link to={`/${name}`}>
+            <Link className={classes.link} to={`/alpha/${alpha3Code}`}>
                <CardMedia image={png} title={name} className={classes.media} />
                <CardContent>
                   <Typography gutterBottom variant="h6" component="h2">
