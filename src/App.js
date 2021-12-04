@@ -26,8 +26,8 @@ const App = () => {
       <Router history={history}>
          <Switch>
             <Grid container>
+               <Header />
                <Route exact path="/">
-                  <Header />
                   <Grid container className={classes.container} item>
                      <Input />
                   </Grid>
@@ -38,7 +38,9 @@ const App = () => {
                <Route
                   exact
                   path="/alpha/:code"
-                  render={(props) => <CountryPage {...props} />}
+                  render={(props) => (
+                     <CountryPage className={classes.container} {...props} />
+                  )}
                />
             </Grid>
          </Switch>

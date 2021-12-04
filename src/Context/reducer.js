@@ -5,6 +5,7 @@ import {
    STOP_LOADING,
    DISPLAY_ITEMS,
    SINGLE_COUNTRY,
+   SELECT,
 } from "./actions";
 
 const reducer = (state, action) => {
@@ -23,6 +24,9 @@ const reducer = (state, action) => {
          return { ...state, isLoading: false };
       case SINGLE_COUNTRY:
          return { ...state, singleCountry: action.payload };
+      case SELECT:
+         console.log(action.payload);
+         return { ...state, selectValue: action.payload };
       default:
          return state;
    }

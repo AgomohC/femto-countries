@@ -8,6 +8,7 @@ import {
    STOP_LOADING,
    DISPLAY_ITEMS,
    SINGLE_COUNTRY,
+   SELECT,
 } from "./actions";
 
 const AppContext = React.createContext();
@@ -19,45 +20,13 @@ const initialState = {
    searchValue: "",
    singleCountry: [],
    isLoading: false,
+   selectValue: "",
 };
 
 const AppProvider = ({ children }) => {
    const [state, dispatch] = useReducer(reducer, initialState);
    const setDarkMode = () => {
       dispatch({ type: SET_DARK_MODE });
-   };
-   const setSearchValue = async (value) => {
-      dispatch({ type: SET_LOADING });
-      dispatch({ type: SEARCH, payload: value });
-      console.log(value);
-      try {
-         const data = await fetch(`${url}/name/${value}`);
-         const response = await data.json();
-         const responseEdit = await response.map((datum) => {
-            const {
-               name,
-               region,
-               capital,
-               population,
-               flags: { png },
-               alpha3Code,
-            } = datum;
-            return {
-               name,
-               region,
-               capital,
-               population,
-               png,
-               alpha3Code,
-            };
-         });
-
-         dispatch({ type: STOP_LOADING });
-         dispatch({ type: DISPLAY_ITEMS, payload: responseEdit });
-      } catch (error) {
-         dispatch({ type: STOP_LOADING });
-         console.log("error");
-      }
    };
    const fetchData = async () => {
       dispatch({ type: SET_LOADING });
@@ -91,6 +60,79 @@ const AppProvider = ({ children }) => {
    useEffect(() => {
       fetchData();
    }, []);
+   const setSearchValue = async (value) => {
+      if (value.length < 1) {
+         fetchData();
+         return;
+      }
+      dispatch({ type: SET_LOADING });
+      dispatch({ type: SEARCH, payload: value });
+      try {
+         const data = await fetch(`${url}/name/${value}`);
+         const response = await data.json();
+         const responseEdit = await response.map((datum) => {
+            const {
+               name,
+               region,
+               capital,
+               population,
+               flags: { png },
+               alpha3Code,
+            } = datum;
+            return {
+               name,
+               region,
+               capital,
+               population,
+               png,
+               alpha3Code,
+            };
+         });
+
+         dispatch({ type: STOP_LOADING });
+         dispatch({ type: DISPLAY_ITEMS, payload: responseEdit });
+      } catch (error) {
+         dispatch({ type: STOP_LOADING });
+         console.log("error");
+      }
+   };
+
+   const setSelectValue = async (value) => {
+      if (value === "All") {
+         dispatch({ type: SELECT, payload: value });
+         fetchData();
+         return;
+      }
+      dispatch({ type: SET_LOADING });
+      dispatch({ type: SELECT, payload: value });
+      try {
+         const data = await fetch(`${url}region/${value}`);
+         const response = await data.json();
+         const responseEdit = await await response.map((datum) => {
+            const {
+               name,
+               region,
+               capital,
+               population,
+               flags: { png },
+               alpha3Code,
+            } = datum;
+            return {
+               name,
+               region,
+               capital,
+               population,
+               png,
+               alpha3Code,
+            };
+         });
+         dispatch({ type: STOP_LOADING });
+         dispatch({ type: DISPLAY_ITEMS, payload: responseEdit });
+      } catch (error) {
+         console.log(error);
+      }
+   };
+
    const getSingleCountry = useCallback(async (code) => {
       try {
          const data = await fetch(`${url}alpha/${code}`);
@@ -117,7 +159,13 @@ const AppProvider = ({ children }) => {
    }, []);
    return (
       <AppContext.Provider
-         value={{ ...state, setDarkMode, setSearchValue, getSingleCountry }}
+         value={{
+            ...state,
+            setDarkMode,
+            setSearchValue,
+            getSingleCountry,
+            setSelectValue,
+         }}
       >
          {children}
       </AppContext.Provider>

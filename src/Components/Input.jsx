@@ -77,7 +77,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Input = () => {
    const classes = useStyles();
-   const { searchValue, setSearchValue } = useGlobalContext();
+   const { searchValue, setSearchValue, setSelectValue, selectValue } =
+      useGlobalContext();
 
    return (
       <>
@@ -104,13 +105,19 @@ const Input = () => {
             <Grid item xs={5} sm={4} md={3} className={classes.item2}>
                <FormControl className={classes.select}>
                   <InputLabel>Filter by Region</InputLabel>
-                  <NativeSelect>
-                     <option></option>
-                     <option value="Africa">Africa</option>
-                     <option value="America">America</option>
-                     <option value="Asia">Asia</option>
-                     <option value="Europe">Europe</option>
-                     <option value="Oceania">Oceania</option>
+                  <NativeSelect
+                     value={selectValue}
+                     onChange={(event) => {
+                        const value = event.target.value;
+                        return setSelectValue(value);
+                     }}
+                  >
+                     <option value="All">All</option>
+                     <option value="africa">Africa</option>
+                     <option value="americas">Americas</option>
+                     <option value="asia">Asia</option>
+                     <option value="europe">Europe</option>
+                     <option value="oceania">Oceania</option>
                   </NativeSelect>
                </FormControl>
             </Grid>

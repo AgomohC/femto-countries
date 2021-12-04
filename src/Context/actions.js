@@ -4,3 +4,4 @@ export const SEARCH = "SEARCH";
 export const STOP_LOADING = "STOP_LOADING";
 export const DISPLAY_ITEMS = "DISPLAY_ITEMS";
 export const SINGLE_COUNTRY = "SINGLE_COUNTRY";
+export const SELECT = "SELECT";
