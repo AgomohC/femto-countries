@@ -38,9 +38,7 @@ const App = () => {
                <Route
                   exact
                   path="/alpha/:code"
-                  render={(props) => (
-                     <CountryPage className={classes.container} {...props} />
-                  )}
+                  render={(props) => <CountryPage {...props} />}
                />
             </Grid>
          </Switch>
