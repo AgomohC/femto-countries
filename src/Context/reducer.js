@@ -25,7 +25,6 @@ const reducer = (state, action) => {
       case SINGLE_COUNTRY:
          return { ...state, singleCountry: action.payload };
       case SELECT:
-         console.log(action.payload);
          return { ...state, selectValue: action.payload };
       default:
          return state;

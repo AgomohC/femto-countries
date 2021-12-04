@@ -10,6 +10,7 @@ import {
 import Brightness2OutlinedIcon from "@material-ui/icons/Brightness3Outlined";
 import Brightness2Icon from "@material-ui/icons/Brightness3";
 import { useGlobalContext } from "../Context/appContext";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
    title: {
@@ -33,6 +34,10 @@ const useStyles = makeStyles((theme) => ({
    icon: {
       transform: `rotate(${180}deg)`,
    },
+   link: {
+      color: "inherit",
+      textDecoration: "none",
+   },
 }));
 
 const Header = () => {
@@ -48,7 +53,9 @@ const Header = () => {
                      variant="body1"
                      component="h1"
                   >
-                     Where in the World?
+                     <Link className={classes.link} to="/">
+                        Where in the World?
+                     </Link>
                   </Typography>
                   <div className={classes.flex}>
                      <IconButton color="inherit" onClick={() => setDarkMode()}>

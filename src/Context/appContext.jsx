@@ -18,7 +18,7 @@ const initialState = {
    countries: [],
    isDarkMode: true,
    searchValue: "",
-   singleCountry: [],
+   singleCountry: {},
    isLoading: false,
    selectValue: "",
 };
@@ -134,6 +134,8 @@ const AppProvider = ({ children }) => {
    };
 
    const getSingleCountry = useCallback(async (code) => {
+      dispatch({ type: SET_LOADING });
+
       try {
          const data = await fetch(`${url}alpha/${code}`);
          const response = await data.json();
@@ -148,12 +150,15 @@ const AppProvider = ({ children }) => {
             languages: response.languages,
             nativeName: response.nativeName,
             currencies: response.currencies,
+            borders: response.borders,
          };
          dispatch({
             type: SINGLE_COUNTRY,
             payload: responseMap,
          });
+         dispatch({ type: STOP_LOADING });
       } catch {
+         dispatch({ type: STOP_LOADING });
          console.log("error");
       }
    }, []);
