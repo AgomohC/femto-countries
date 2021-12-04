@@ -30,6 +30,9 @@ const useStyles = makeStyles((theme) => ({
       paddingRight: 0,
       flexGrow: 1,
    },
+   icon: {
+      transform: `rotate(${180}deg)`,
+   },
 }));
 
 const Header = () => {
@@ -50,9 +53,9 @@ const Header = () => {
                   <div className={classes.flex}>
                      <IconButton color="inherit" onClick={() => setDarkMode()}>
                         {isDarkMode ? (
-                           <Brightness2Icon />
+                           <Brightness2Icon className={classes.icon} />
                         ) : (
-                           <Brightness2OutlinedIcon />
+                           <Brightness2OutlinedIcon className={classes.icon} />
                         )}
                      </IconButton>
                      <Typography variant="body1" color="initial" component="h2">
