@@ -90,7 +90,10 @@ const Input = () => {
                   <InputBase
                      placeholder="Search…"
                      value={searchValue}
-                     onChange={(event) => setSearchValue(event)}
+                     onChange={(event) => {
+                        const value = event.target.value;
+                        return setSearchValue(value);
+                     }}
                      classes={{
                         root: classes.inputRoot,
                         input: classes.inputInput,

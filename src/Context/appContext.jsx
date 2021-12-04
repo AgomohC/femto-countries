@@ -26,8 +26,38 @@ const AppProvider = ({ children }) => {
    const setDarkMode = () => {
       dispatch({ type: SET_DARK_MODE });
    };
-   const setSearchValue = (event) => {
-      dispatch({ type: SEARCH, payload: event.target.value });
+   const setSearchValue = async (value) => {
+      dispatch({ type: SET_LOADING });
+      dispatch({ type: SEARCH, payload: value });
+      console.log(value);
+      try {
+         const data = await fetch(`${url}/name/${value}`);
+         const response = await data.json();
+         const responseEdit = await response.map((datum) => {
+            const {
+               name,
+               region,
+               capital,
+               population,
+               flags: { png },
+               alpha3Code,
+            } = datum;
+            return {
+               name,
+               region,
+               capital,
+               population,
+               png,
+               alpha3Code,
+            };
+         });
+
+         dispatch({ type: STOP_LOADING });
+         dispatch({ type: DISPLAY_ITEMS, payload: responseEdit });
+      } catch (error) {
+         dispatch({ type: STOP_LOADING });
+         console.log("error");
+      }
    };
    const fetchData = async () => {
       dispatch({ type: SET_LOADING });

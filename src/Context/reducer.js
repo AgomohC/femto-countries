@@ -13,7 +13,7 @@ const reducer = (state, action) => {
          const { isDarkMode } = state;
          return { ...state, isDarkMode: !isDarkMode };
       case SEARCH:
-         const newValue = action.payload;
+         const newValue = action.payload.value;
          return { ...state, searchValue: newValue };
       case DISPLAY_ITEMS:
          return { ...state, countries: action.payload };
