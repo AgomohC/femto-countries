@@ -1,6 +1,14 @@
 import axios from "axios";
 import React, { useContext, useReducer, useEffect, useCallback } from "react";
 import reducer from "./reducer";
+import {
+   SET_LOADING,
+   SET_DARK_MODE,
+   SEARCH,
+   STOP_LOADING,
+   DISPLAY_ITEMS,
+   SINGLE_COUNTRY,
+} from "./actions";
 
 const AppContext = React.createContext();
 const url = "https://restcountries.com/v2/";
@@ -16,13 +24,13 @@ const initialState = {
 const AppProvider = ({ children }) => {
    const [state, dispatch] = useReducer(reducer, initialState);
    const setDarkMode = () => {
-      dispatch({ type: "SET_DARK_MODE" });
+      dispatch({ type: SET_DARK_MODE });
    };
    const setSearchValue = (event) => {
-      dispatch({ type: "SEARCH", payload: event.target.value });
+      dispatch({ type: SEARCH, payload: event.target.value });
    };
    const fetchData = async () => {
-      dispatch({ type: "SET_LOADING" });
+      dispatch({ type: SET_LOADING });
       try {
          const { data } = await axios.get(`${url}all`);
          const response = await data.map((datum) => {
@@ -43,10 +51,10 @@ const AppProvider = ({ children }) => {
                alpha3Code,
             };
          });
-         dispatch({ type: "STOP_LOADING" });
-         dispatch({ type: "DISPLAY_ITEMS", payload: response });
+         dispatch({ type: STOP_LOADING });
+         dispatch({ type: DISPLAY_ITEMS, payload: response });
       } catch (error) {
-         dispatch({ type: "STOP_LOADING" });
+         dispatch({ type: STOP_LOADING });
          console.log(`error`);
       }
    };
@@ -70,7 +78,7 @@ const AppProvider = ({ children }) => {
             currencies: response.currencies,
          };
          dispatch({
-            type: "SINGLE_COUNTRY",
+            type: SINGLE_COUNTRY,
             payload: responseMap,
          });
       } catch {
