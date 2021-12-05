@@ -5,7 +5,6 @@ import {
    Button,
    Typography,
    CircularProgress,
-   Chip,
 } from "@material-ui/core";
 import { useGlobalContext } from "../Context/appContext";
 import { Link } from "react-router-dom";
@@ -31,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
    imgContainer: {
       position: "relative",
       width: "100%",
-      height: "50vh",
+      height: "55vh",
       minHeight: "160px",
    },
    img: {
@@ -61,15 +60,19 @@ const useStyles = makeStyles((theme) => ({
    },
    chipContainer: {
       display: "flex",
-      alignItems: "center",
+      alignItems: "baseline",
       flexWrap: "wrap",
    },
-   chip: {
+   chipLink: {
       marginLeft: theme.spacing(3),
       backgroundColor: theme.palette.primary.main,
       [theme.breakpoints.down("sm")]: {
          marginTop: theme.spacing(2),
       },
+      marginTop: theme.spacing(2),
+
+      color: "inherit",
+      textDecoration: "none",
    },
    lang: {
       [theme.breakpoints.down("sm")]: {
@@ -84,12 +87,14 @@ const CountryPage = (props) => {
          params: { code },
       },
    } = props;
+
    const { getSingleCountry, isLoading } = useGlobalContext();
 
    useEffect(() => {
       getSingleCountry(code);
    }, [code, getSingleCountry]);
    const { singleCountry } = useGlobalContext();
+
    const {
       name,
       region,
@@ -103,6 +108,22 @@ const CountryPage = (props) => {
       currencies,
       borders,
    } = singleCountry;
+   const renderBorder = (borders) => {
+      const border = borders.map((border) => {
+         return (
+            <Link
+               key={border}
+               className={classes.chipLink}
+               to={`/alpha/${border}`}
+            >
+               <Button size="small" variant="contained" color="primary">
+                  {border}
+               </Button>
+            </Link>
+         );
+      });
+      return border;
+   };
 
    const classes = useStyles();
    return (
@@ -239,6 +260,7 @@ const CountryPage = (props) => {
                               ? languages
                                    .map((language) => {
                                       const { name } = language;
+
                                       return name;
                                    })
                                    .join(", ")
@@ -258,13 +280,7 @@ const CountryPage = (props) => {
                                  Border Countries:
                               </Typography>
                               <div className={classes.chipContainer}>
-                                 {borders.map((border) => (
-                                    <Chip
-                                       className={classes.chip}
-                                       square
-                                       label={border}
-                                    />
-                                 ))}
+                                 {renderBorder(borders)}
                               </div>
                            </>
                         ) : (

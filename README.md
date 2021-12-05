@@ -10,7 +10,6 @@ This is a solution to the [REST Countries API with color theme switcher challeng
    -  [Links](#links)
 -  [My process](#my-process)
    -  [Built with](#built-with)
-   -  [Continued development](#continued-development)
    -  [Useful resources](#useful-resources)
 -  [Author](#author)
 
@@ -31,6 +30,11 @@ Users should be able to:
 
 ![](./screenshot.jpg)
 
+### Links
+
+-  Solution URL: [Add solution URL here](https://your-solution-url.com)
+-  Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+
 ## My process
 
 ### Built with
@@ -45,6 +49,7 @@ Users should be able to:
 ### Useful resources
 
 -  [Material-UI Documentation](https://v4.mui.com/getting-started/usage/) - This is my first major material UI project, so the documentation helped a lot.
+-  [Anthony Sistilli's Material UI playlist on YouTube](https://www.youtube.com/playlist?list=PLQg6GaokU5CwiVmsZ0d_9Zsg_DnIP_xwr) - I learned material UI with this playlist :D.
 
 ## Author
 

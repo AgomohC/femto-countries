@@ -152,16 +152,18 @@ const AppProvider = ({ children }) => {
             currencies: response.currencies,
             borders: response.borders,
          };
+
          dispatch({
             type: SINGLE_COUNTRY,
             payload: responseMap,
          });
          dispatch({ type: STOP_LOADING });
       } catch {
-         dispatch({ type: STOP_LOADING });
          console.log("error");
+         dispatch({ type: STOP_LOADING });
       }
    }, []);
+
    return (
       <AppContext.Provider
          value={{
