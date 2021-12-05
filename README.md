@@ -40,18 +40,6 @@ Desktop (width: 1440px) view of single Country page in dark mode
 Desktop (width: 1440px) view of single Country page in light mode
 ![](./assets/4.png)
 
-Mobile view (width: 375px) of single Country page in dark mode
-![](./assets/5.png)
-
-Mobile view (width: 375px) of single Country page in light mode
-![](./assets/6.png)
-
-Mobile view (width: 375px) of home page in light mode
-![](./assets/7.png)
-
-Mobile view (width: 375px) of home page in dark mode
-![](./assets/8.png)
-
 ### Links
 
 -  Solution URL: [Add solution URL here](https://your-solution-url.com)
