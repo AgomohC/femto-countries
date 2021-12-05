@@ -46,10 +46,10 @@ Mobile view (width: 375px) of single Country page in dark mode
 Mobile view (width: 375px) of single Country page in light mode
 ![](./assets/6.png)
 
-Mobile view (width: 375px) of home page in dark mode
+Mobile view (width: 375px) of home page in light mode
 ![](./assets/7.png)
 
-Mobile view (width: 375px) of home page in light mode
+Mobile view (width: 375px) of home page in dark mode
 ![](./assets/8.png)
 
 ### Links
