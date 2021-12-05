@@ -38,14 +38,24 @@ const useStyles = makeStyles((theme) => ({
    select: {
       width: "100%",
    },
+   selectColor: {
+      padding: theme.spacing(1),
+
+      backgroundColor: theme.palette.primary.main,
+      "&:hover": {
+         backgroundColor: alpha(theme.palette.primary.main, 0.6),
+      },
+   },
    search: {
       display: "flex",
       position: "relative",
       borderRadius: theme.shape.borderRadius,
-      backgroundColor: alpha(theme.palette.common.white, 0.15),
+      backgroundColor: theme.palette.primary.main,
       "&:hover": {
-         backgroundColor: alpha(theme.palette.common.white, 0.25),
+         backgroundColor: alpha(theme.palette.primary.main, 0.6),
       },
+      padding: theme.spacing(1),
+      alignItems: "center",
 
       width: "100%",
       [theme.breakpoints.up("sm")]: {
@@ -91,6 +101,7 @@ const Input = () => {
                   <InputBase
                      placeholder="Search…"
                      value={searchValue}
+                     color="primary"
                      onChange={(event) => {
                         const value = event.target.value;
                         return setSearchValue(value);
@@ -111,6 +122,7 @@ const Input = () => {
                         const value = event.target.value;
                         return setSelectValue(value);
                      }}
+                     className={classes.selectColor}
                   >
                      <option value="All">All</option>
                      <option value="africa">Africa</option>

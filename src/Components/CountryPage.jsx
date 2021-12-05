@@ -57,6 +57,7 @@ const useStyles = makeStyles((theme) => ({
    progress: {
       marginLeft: "auto",
       marginRight: "auto",
+      color: theme.palette.text.primary,
    },
    chipContainer: {
       display: "flex",
@@ -65,6 +66,7 @@ const useStyles = makeStyles((theme) => ({
    },
    chip: {
       marginLeft: theme.spacing(3),
+      backgroundColor: theme.palette.primary.main,
       [theme.breakpoints.down("sm")]: {
          marginTop: theme.spacing(2),
       },
@@ -115,8 +117,12 @@ const CountryPage = (props) => {
             <Grid container item xs={10} className={classes.container}>
                <Grid xs={6} md={2} item className={classes.btn}>
                   <Link className={classes.link} to={"/"}>
-                     <Button startIcon={<ArrowBackIcon />} variant="contained">
-                        Back to home
+                     <Button
+                        startIcon={<ArrowBackIcon />}
+                        variant="contained"
+                        color="primary"
+                     >
+                        Back
                      </Button>
                   </Link>
                </Grid>

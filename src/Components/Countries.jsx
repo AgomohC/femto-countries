@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme) => ({
    progress: {
       marginLeft: "auto",
       marginRight: "auto",
+      color: theme.palette.text.primary,
    },
 }));
 

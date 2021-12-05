@@ -2,14 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import { AppProvider } from "./Context/appContext";
-import { ThemeProvider, theme } from "./theme";
+import { Router } from "react-router-dom";
+import { createBrowserHistory } from "history";
 
+const history = createBrowserHistory();
 ReactDOM.render(
    <React.StrictMode>
       <AppProvider>
-         <ThemeProvider theme={theme}>
+         <Router history={history}>
             <App />
-         </ThemeProvider>
+         </Router>
       </AppProvider>
    </React.StrictMode>,
    document.getElementById("root")

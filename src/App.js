@@ -1,48 +1,41 @@
 import React from "react";
-import Header from "./Components/Header";
-import { makeStyles, Grid } from "@material-ui/core";
-import Input from "./Components/Input";
-import Countries from "./Components/Countries";
-import CountryPage from "./Components/CountryPage";
-import { Router, Switch, Route } from "react-router-dom";
-import { createBrowserHistory } from "history";
 
-const history = createBrowserHistory();
-
-const useStyles = makeStyles((theme) => ({
-   container: {
-      marginTop: theme.spacing(10),
-   },
-   container2: {
-      marginLeft: "auto",
-      marginRight: "auto",
-      marginTop: theme.spacing(5),
-   },
-}));
+import { Switch } from "react-router-dom";
+import { createTheme, ThemeProvider } from "@material-ui/core/styles";
+import { useGlobalContext } from "./Context/appContext";
+import Home from "./Home";
 
 const App = () => {
-   const classes = useStyles();
+   const { isDarkMode } = useGlobalContext();
+
+   const theme = createTheme({
+      typography: {
+         fontFamily: [
+            "Nunito Sans",
+            "Roboto",
+            "Helvetica",
+            "Arial",
+            "sans-serif",
+         ].join(","),
+      },
+      palette: {
+         type: isDarkMode ? "dark" : "light",
+         primary: {
+            main: isDarkMode ? "hsl(209, 23%, 22%)" : "hsl(0, 0%, 100%)",
+            dark: isDarkMode ? "hsl(207, 26%, 17%)" : "hsl(0, 0%, 98%)",
+         },
+         text: {
+            primary: isDarkMode ? "hsl(0, 0%, 100%)" : "hsl(200, 15%, 8%)",
+         },
+      },
+   });
+
    return (
-      <Router history={history}>
+      <ThemeProvider theme={theme}>
          <Switch>
-            <Grid container>
-               <Header />
-               <Route exact path="/">
-                  <Grid container className={classes.container} item>
-                     <Input />
-                  </Grid>
-                  <Grid container className={classes.container2} item xs={10}>
-                     <Countries />
-                  </Grid>
-               </Route>
-               <Route
-                  exact
-                  path="/alpha/:code"
-                  render={(props) => <CountryPage {...props} />}
-               />
-            </Grid>
+            <Home />
          </Switch>
-      </Router>
+      </ThemeProvider>
    );
 };
 

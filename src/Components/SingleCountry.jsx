@@ -18,19 +18,22 @@ const useStyles = makeStyles((theme) => ({
       color: "inherit",
       textDecoration: "none",
    },
+   color: {
+      backgroundColor: theme.palette.primary.main,
+   },
 }));
 
 const SingleCountry = (props) => {
    const classes = useStyles();
 
    const {
-      country: { png, name, region, capital, population, alpha3Code },
+      country: { svg, name, region, capital, population, alpha3Code },
    } = props;
    return (
-      <Card>
+      <Card className={classes.color}>
          <CardActionArea>
             <Link className={classes.link} to={`/alpha/${alpha3Code}`}>
-               <CardMedia image={png} title={name} className={classes.media} />
+               <CardMedia image={svg} title={name} className={classes.media} />
                <CardContent>
                   <Typography gutterBottom variant="h6" component="h2">
                      {name}

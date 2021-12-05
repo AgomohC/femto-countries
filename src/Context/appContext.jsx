@@ -38,7 +38,7 @@ const AppProvider = ({ children }) => {
                region,
                capital,
                population,
-               flags: { png },
+               flags: { svg },
                alpha3Code,
             } = datum;
             return {
@@ -46,7 +46,7 @@ const AppProvider = ({ children }) => {
                region,
                capital,
                population,
-               png,
+               svg,
                alpha3Code,
             };
          });
@@ -145,7 +145,7 @@ const AppProvider = ({ children }) => {
             capital: response.capital,
             population: response.population,
             subregion: response.subregion,
-            flags: response.flags.png,
+            flags: response.flags.svg,
             topLevelDomain: response.topLevelDomain,
             languages: response.languages,
             nativeName: response.nativeName,
@@ -180,5 +180,6 @@ const AppProvider = ({ children }) => {
 export const useGlobalContext = () => {
    return useContext(AppContext);
 };
+export default AppContext;
 
 export { AppContext, AppProvider };
