@@ -30,13 +30,14 @@ const useStyles = makeStyles((theme) => ({
    imgContainer: {
       position: "relative",
       width: "100%",
-      height: "55vh",
-      minHeight: "160px",
+      maxHeight: "55vh",
+      height: "auto",
+      // minHeight: "160px",
    },
    img: {
       position: "absolute",
       width: "100%",
-      height: "100%",
+      height: "auto",
    },
    textContainer: {
       marginTop: theme.spacing(4),
