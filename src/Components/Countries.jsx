@@ -8,6 +8,8 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: "auto",
       marginRight: "auto",
       marginTop: theme.spacing(5),
+      display: "flex",
+      justifyContent: "center",
    },
    progress: {
       marginLeft: "auto",

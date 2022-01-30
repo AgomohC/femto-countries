@@ -30,9 +30,17 @@ const useStyles = makeStyles((theme) => ({
    imgContainer: {
       position: "relative",
       width: "100%",
-      maxHeight: "55vh",
-      height: "auto",
-      // minHeight: "160px",
+      maxHeight: "20vh",
+      display: "flex",
+      alignItems: "center",
+
+      [theme.breakpoints.up("sm")]: {
+         maxHeight: "55vh",
+      },
+      minHeight: "160px",
+      marginTop: theme.spacing(8),
+
+      marginBottom: theme.spacing(4),
    },
    img: {
       position: "absolute",
@@ -40,7 +48,12 @@ const useStyles = makeStyles((theme) => ({
       height: "auto",
    },
    textContainer: {
-      marginTop: theme.spacing(4),
+      [theme.breakpoints.up("md")]: {
+         marginTop: 0,
+         marginBottom: 0,
+      },
+      marginTop: theme.spacing(8),
+
       marginBottom: theme.spacing(4),
    },
    bold: {
@@ -53,6 +66,8 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: "auto",
       marginRight: "auto",
       marginTop: theme.spacing(10),
+      display: "flex",
+      justifyContent: "center",
    },
    progress: {
       marginLeft: "auto",
@@ -148,7 +163,12 @@ const CountryPage = (props) => {
                      </Button>
                   </Link>
                </Grid>
-               <Grid container item className={classes.container2}>
+               <Grid
+                  container
+                  item
+                  alignItems="center"
+                  className={classes.container2}
+               >
                   <Grid
                      item
                      xs={12}
